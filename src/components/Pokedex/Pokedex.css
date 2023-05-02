@@ -1,0 +1,61 @@
+@font-face {
+  font-family: minecraftFont;
+  src: url("../../fonts/Minecraft.ttf");
+}
+
+.pokeFrame {
+  width: 24.25rem;
+  height: 36.25rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("../../../public/images/pokedex.png");
+  background-size: cover;
+}
+
+.pokemon-image {
+  width: 10rem;
+  padding-top: 3rem;
+}
+
+.pokedex-button {
+  margin-right: 2rem;
+  height: 2rem;
+  width: 5rem;
+  background-color: #282a3a;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset, 0 -20px 10px -20px rgba(0,0,0,0.45) inset, 20px 0 10px -20px rgba(0,0,0,0.45) inset;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.pokemon {
+  font-family: minecraftFont;
+  font-size: 1.6rem;
+}
+
+.pokedex-button:hover {
+  background-color: #4d4d4d;
+}
+
+.pokedex-text {
+  text-align: center;
+  font-size: 1.2rem;
+  padding-left: 1rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+}
+
+.pokedex-input-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.pokedex-input {
+  height: 1.8rem;
+  padding-left: 0.5rem;
+}
