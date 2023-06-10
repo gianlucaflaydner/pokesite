@@ -2,20 +2,21 @@ import { useEffect, useState } from "react";
 import { Pokedex } from "../../components/Pokedex/Pokedex";
 import "./PokedexPage.css";
 import axios from "axios";
+import Loader from "../../components/Loader/Loader";
 
 export default function PokedexPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const [src, setSrc] = useState("");
   const [name, setName] = useState("");
   const [id, setId] = useState(1);
   const [index, setIndex] = useState(1);
 
-
-  
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((response) => {
       setSrc(response.data.sprites.front_default);
       setName(response.data.name);
       setId(response.data.id);
+      setIsLoading(false);
     });
   }, [index]);
 
@@ -41,21 +42,24 @@ export default function PokedexPage() {
       .catch(() => {
         setName("NOT FOUND");
         setId(0);
-        setSrc(
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
-        );
+        setIndex(0);
+        setSrc("https://static.thenounproject.com/png/1103191-200.png");
       });
   };
   return (
     <div className="pokedex-widget">
-      <Pokedex
-        src={src}
-        name={name}
-        id={id}
-        handleNextButton={handleNextButton}
-        handlePrevButton={handlePrevButton}
-        handleSearchPokemon={handleSearchPokemon}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Pokedex
+          src={src}
+          name={name}
+          id={id}
+          handleNextButton={handleNextButton}
+          handlePrevButton={handlePrevButton}
+          handleSearchPokemon={handleSearchPokemon}
+        />
+      )}
     </div>
   );
 }
