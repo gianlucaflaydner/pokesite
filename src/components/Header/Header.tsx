@@ -10,9 +10,6 @@ export default function Header() {
       </div>
       <div className="header-links">
         <NavLink className="navbar-item" to="/">
-          Home
-        </NavLink>
-        <NavLink className="navbar-item" to="/pokedex">
           Pokedex
         </NavLink>
         <NavLink className="navbar-item" to="/pokelist">

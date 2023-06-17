@@ -3,6 +3,42 @@
   src: url("../../fonts/PokemonSolid.ttf");
 }
 
+@media (min-width:620px){
+
+
+  .header-title{
+    padding-bottom: 2rem;
+    font-size: 3rem;
+  }
+  
+  .header-pokeball-image{
+    width:4rem;
+    height:4rem;
+  }
+}
+@media (max-width:619px){
+ 
+
+
+
+  .header-pokeball-image{
+    width: 3rem;
+    height: 3rem;
+    
+  }
+
+  .header-title{
+    display:none;
+    
+  }
+}
+
+.header-title {
+  font-family: pokemonFont;
+  color: #fff9de;
+}
+
+
 .header-container {
   display: flex;
   align-items: center;
@@ -14,13 +50,6 @@
   padding-right: 2rem;
 }
 
-.header-title {
-  font-family: pokemonFont;
-  color: #fff9de;
-  font-size: 3rem;
-  padding-bottom: 2rem;
-}
-
 .header-title-container {
   display: flex;
   align-items: center;
@@ -29,8 +58,6 @@
 .header-pokeball-image {
   background-image: url("../../../public/images/pokebola.png");
   background-size: cover;
-  width: 4rem;
-  height: 4rem;
 }
 
 .header-links {
@@ -39,10 +66,12 @@
   justify-content: space-between;
   gap: 2.5rem;
   padding-right: 2rem;
+  
 }
 
 .navbar-item {
   font-size: 1.7rem;
   font-style: normal;
   color: #000000;
+
 }

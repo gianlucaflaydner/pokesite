@@ -2,60 +2,63 @@ import { useEffect, useState } from "react";
 import { Pokedex } from "../../components/Pokedex/Pokedex";
 import "./PokedexPage.css";
 import axios from "axios";
+import Loader from "../../components/Loader/Loader";
 
 export default function PokedexPage() {
-  const [src, setSrc] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [pokemonImageSrc, setPokemonImageSrc] = useState("");
   const [name, setName] = useState("");
   const [id, setId] = useState(1);
-  const [index, setIndex] = useState(1);
 
-
-  
-  useEffect(() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((response) => {
-      setSrc(response.data.sprites.front_default);
-      setName(response.data.name);
-      setId(response.data.id);
-    });
-  }, [index]);
-
-  const handleNextButton = () => {
-    const pokemonIndex = index + 1;
-    setIndex(pokemonIndex);
-  };
-  const handlePrevButton = () => {
-    const pokemonIndex = index !== 1 ? index - 1 : index;
-    setIndex(pokemonIndex);
-  };
-
-  const handleSearchPokemon = (inputValue: string) => {
-    const formattedValue = inputValue.toLocaleLowerCase();
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${formattedValue}`)
+  async function getPokemon(identification: string | number) {
+    await axios
+      .get(`https://pokeapi.co/api/v2/pokemon/${identification}`)
       .then((response) => {
-        setSrc(response.data.sprites.front_default);
+        setPokemonImageSrc(response.data.sprites.front_default);
         setName(response.data.name);
         setId(response.data.id);
-        setIndex(response.data.id);
+        setIsLoading(false);
       })
       .catch(() => {
         setName("NOT FOUND");
         setId(0);
-        setSrc(
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+        setPokemonImageSrc(
+          "https://static.thenounproject.com/png/1103191-200.png"
         );
       });
+  }
+
+  useEffect(() => {
+    getPokemon(id);
+  }, [id]);
+
+  const handleNextButton = () => {
+    const pokemonIndex = id + 1;
+    setId(pokemonIndex);
+  };
+  const handlePrevButton = () => {
+    const pokemonIndex = id !== 1 ? id - 1 : id;
+    setId(pokemonIndex);
+  };
+
+  const handleSearchPokemon = (inputValue: string) => {
+    const formattedValue = inputValue.toLocaleLowerCase();
+    getPokemon(formattedValue);
   };
   return (
     <div className="pokedex-widget">
-      <Pokedex
-        src={src}
-        name={name}
-        id={id}
-        handleNextButton={handleNextButton}
-        handlePrevButton={handlePrevButton}
-        handleSearchPokemon={handleSearchPokemon}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Pokedex
+          imageSrc={pokemonImageSrc}
+          pokemonName={name}
+          pokemonId={id}
+          handleNextButton={handleNextButton}
+          handlePrevButton={handlePrevButton}
+          handleSearchPokemon={handleSearchPokemon}
+        />
+      )}
     </div>
   );
 }
