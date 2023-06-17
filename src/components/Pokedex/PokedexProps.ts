@@ -1,7 +1,7 @@
 export interface PokedexProps {
-  src: string;
-  name: string;
-  id: number;
+  imageSrc: string;
+  pokemonName: string;
+  pokemonId: number;
   handlePrevButton: () => void;
   handleNextButton: () => void;
   handleSearchPokemon: (inputValue: string) => void;

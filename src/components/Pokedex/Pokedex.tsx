@@ -4,9 +4,9 @@ import "./Pokedex.css";
 
 export const Pokedex: React.FC<PokedexProps> = (props) => {
   const {
-    name,
-    src,
-    id,
+    pokemonName,
+    imageSrc,
+    pokemonId,
     handlePrevButton,
     handleNextButton,
     handleSearchPokemon,
@@ -15,10 +15,10 @@ export const Pokedex: React.FC<PokedexProps> = (props) => {
 
   return (
     <div className="pokeFrame">
-      <img alt={name} src={src} className="pokemon-image"></img>
+      <img alt={pokemonName} src={imageSrc} className="pokemon-image"></img>
       <div>
         <h1 className="pokemon">
-          #{id} - {name}
+          #{pokemonId} - {pokemonName}
         </h1>
       </div>
       <div style={{ marginTop: "3rem" }}>
